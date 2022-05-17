@@ -2,6 +2,7 @@
   "name": "auto-gen-data",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://minhthao56.github.io/auto-gen-data",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
