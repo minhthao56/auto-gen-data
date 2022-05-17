@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.7",
+    "gh-pages": "^4.0.0",
     "json-2-csv": "^3.17.1",
     "moment": "^2.29.3",
     "react": "^18.0.0",
