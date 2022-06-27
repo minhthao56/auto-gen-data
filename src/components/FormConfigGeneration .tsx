@@ -39,13 +39,13 @@ export default function FormConfigGeneration({
           fluid
           justify="flex-start"
           display="flex"
-          css={{ flexDirection: "column" }}
+          css={{ flexDirection: "column", pb: 16 }}
         >
           <Controller
             control={control}
             name="numberRows"
             rules={{
-              required: { value: true, message: "Input number row zo fen" },
+              required: { value: true, message: "Add number row zo fen" },
             }}
             render={({ field: { onChange }, fieldState: { error } }) => {
               const isError = Boolean(error?.message);
@@ -131,7 +131,6 @@ export default function FormConfigGeneration({
               }}
             />
           </Row>
-
           <Button type="submit">Create & Download CSV</Button>
         </Container>
       </Card>
