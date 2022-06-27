@@ -11,7 +11,7 @@ function App() {
   const [dataStudents, setDataStudents] = useState<StudentCSVProps[]>([]);
 
   const handleSubmit = async (data: FormConfigGenerationFormProps) => {
-    const students = generationListStudent(data);
+    const students = await generationListStudent(data);
     setDataStudents(students);
     const csv = await convertJSONToCSV(students);
     const hiddenElement = document.createElement("a");
