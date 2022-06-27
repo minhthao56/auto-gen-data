@@ -72,7 +72,10 @@ export default function FormConfigGeneration({
             render={({ field: { onChange } }) => {
               return (
                 <Checkbox onChange={onChange} css={{ marginBottom: 8 }}>
-                  <Text>Random generation number phone</Text>
+                  <Text>
+                    Random generation number phone (Can use but it can be
+                    existed in DB)
+                  </Text>
                 </Checkbox>
               );
             }}
