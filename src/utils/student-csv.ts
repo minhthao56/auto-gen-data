@@ -88,10 +88,10 @@ export const generationStudent = async ({
   }
 
   const _student = hasPhoneticName ? {
-    first_name: firstName,
     last_name: lastName,
-    first_name_phonetic: firstNamePhonetic,
+    first_name: firstName,
     last_name_phonetic: lastNamePhonetic,
+    first_name_phonetic: firstNamePhonetic,
   }: {
     name,
   };
