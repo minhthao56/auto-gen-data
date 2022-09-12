@@ -11,4 +11,13 @@ export interface StudentCSVProps {
   birthday?: string;
   gender?: number | string;
   location?: string;
+  tag?: string;
+  student_phone_number?: string;
+  home_phone_number?: string;
+  contact_preference?: number;
+  postal_code?: number;
+  prefecture?: string;
+  city?: string;
+  street1?: string;
+  street2?: string;
 }

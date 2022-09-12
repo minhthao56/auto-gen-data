@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   Row,
+  Col,
   Card,
 } from "@nextui-org/react";
 import { useForm, Controller } from "react-hook-form";
@@ -15,7 +16,11 @@ export interface FormConfigGenerationFormProps {
   hasNumberPhone: boolean;
   hasBirthday: boolean;
   hasLocations: boolean;
+  hasTags: boolean;
+  hasHomeAddress: boolean;
   location: string;
+  tag: string;
+  prefecture: string;
   hasGender: boolean;
 }
 
@@ -73,7 +78,8 @@ export default function FormConfigGeneration({
               return (
                 <Checkbox onChange={onChange} css={{ marginBottom: 8 }}>
                   <Text>
-                    Generation with first name, last name, first name phonetic, last name phonetic field
+                    Generation with first name, last name, first name phonetic,
+                    last name phonetic field
                   </Text>
                 </Checkbox>
               );
@@ -86,10 +92,7 @@ export default function FormConfigGeneration({
             render={({ field: { onChange } }) => {
               return (
                 <Checkbox onChange={onChange} css={{ marginBottom: 8 }}>
-                  <Text>
-                    Random generation number phone (Can use but it can be
-                    existed in DB)
-                  </Text>
+                  <Text>Random student phone number phone</Text>
                 </Checkbox>
               );
             }}
@@ -119,32 +122,90 @@ export default function FormConfigGeneration({
           />
 
           <Row align="center">
-            <Controller
-              name="hasLocations"
-              control={control}
-              render={({ field: { onChange } }) => {
-                return (
-                  <Checkbox onChange={onChange} css={{ marginBottom: 8 }} />
-                );
-              }}
-            />
-            <Controller
-              name="location"
-              control={control}
-              render={({ field: { onChange } }) => {
-                const hasLocations = watch("hasLocations");
+            <Col css={{ alignItems: "center", display: "flex" }}>
+              <Controller
+                name="hasLocations"
+                control={control}
+                render={({ field: { onChange } }) => {
+                  return (
+                    <Checkbox onChange={onChange} css={{ marginBottom: 8 }} />
+                  );
+                }}
+              />
+              <Controller
+                name="location"
+                control={control}
+                render={({ field: { onChange } }) => {
+                  const hasLocations = watch("hasLocations");
 
-                return (
-                  <Input
-                    placeholder="ID location"
-                    onChange={onChange}
-                    css={{ marginLeft: 8, marginBottom: 8 }}
-                    disabled={!hasLocations}
-                  />
-                );
-              }}
-            />
+                  return (
+                    <Input
+                      placeholder="ID location"
+                      onChange={onChange}
+                      css={{ marginLeft: 8, marginBottom: 8 }}
+                      disabled={!hasLocations}
+                    />
+                  );
+                }}
+              />
+            </Col>
+            <Col css={{ alignItems: "center", display: "flex" }}>
+              <Controller
+                name="hasTags"
+                control={control}
+                render={({ field: { onChange } }) => {
+                  return (
+                    <Checkbox onChange={onChange} css={{ marginBottom: 8 }} />
+                  );
+                }}
+              />
+              <Controller
+                name="tag"
+                control={control}
+                render={({ field: { onChange } }) => {
+                  const hasTags = watch("hasTags");
+
+                  return (
+                    <Input
+                      placeholder="ID Student's Tag"
+                      onChange={onChange}
+                      css={{ marginLeft: 8, marginBottom: 8 }}
+                      disabled={!hasTags}
+                    />
+                  );
+                }}
+              />
+            </Col>
+
+            <Col css={{ alignItems: "center", display: "flex" }}>
+              <Controller
+                name="hasHomeAddress"
+                control={control}
+                render={({ field: { onChange } }) => {
+                  return (
+                    <Checkbox onChange={onChange} css={{ marginBottom: 8 }} />
+                  );
+                }}
+              />
+              <Controller
+                name="prefecture"
+                control={control}
+                render={({ field: { onChange } }) => {
+                  const hasHomeAddress = watch("hasHomeAddress");
+
+                  return (
+                    <Input
+                      placeholder="ID Prefecture"
+                      onChange={onChange}
+                      css={{ marginLeft: 8, marginBottom: 8 }}
+                      disabled={!hasHomeAddress}
+                    />
+                  );
+                }}
+              />
+            </Col>
           </Row>
+
           <Button type="submit">Create & Download CSV</Button>
         </Container>
       </Card>

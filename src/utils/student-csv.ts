@@ -17,11 +17,11 @@ export const getId = () => {
 };
 
 export function randomString(length: number = 10) {
-  let result = '';
+  let result = "";
   for (let i = 0; i < length; i++) {
-      let rand = Math.floor(Math.random() * 62);
-      const charCode = (rand += rand > 9 ? (rand < 36 ? 55 : 61) : 48);
-      result += String.fromCharCode(charCode);
+    let rand = Math.floor(Math.random() * 62);
+    const charCode = (rand += rand > 9 ? (rand < 36 ? 55 : 61) : 48);
+    result += String.fromCharCode(charCode);
   }
   return result;
 }
@@ -41,6 +41,10 @@ export function checkValidNumberPhone(
   );
 }
 
+export const getRandomNumber = () => {
+  return new Date().getTime();
+};
+
 export const getRandomPhoneNumber = async () => {
   await delay(1);
   const listFirstNUmber = [1, 2, 3, 5, 6, 7, 8, 9];
@@ -53,13 +57,29 @@ export const getRandomPhoneNumber = async () => {
   return `${firstNUmber}${getId().toString().slice(5)}`;
 };
 
+export const getRandomUserPhoneNumber = (
+  comparePhoneNumber?: string
+): string => {
+  const phoneNumber: string = getRandomNumber().toString();
+
+  if (phoneNumber === comparePhoneNumber) {
+    return getRandomUserPhoneNumber(comparePhoneNumber);
+  }
+
+  return phoneNumber;
+};
+
 export const generationStudent = async ({
   hasPhoneticName,
   hasBirthday,
   hasLocations,
   hasNumberPhone,
   hasGender,
+  hasHomeAddress,
+  hasTags,
   location,
+  tag,
+  prefecture,
 }: Omit<FormConfigGenerationFormProps, "numberRows">) => {
   const ulid = monotonicFactory();
 
@@ -71,40 +91,52 @@ export const generationStudent = async ({
   const email = `${lastName}.${firstName}`;
   const firstNamePhonetic = `first-${randomString()}`;
   const lastNamePhonetic = `last-${randomString()}`;
+  const homeAddress = hasHomeAddress
+    ? {
+        postal_code: randomNumber(10000, 99999),
+        prefecture,
+        city: randomString(),
+        street1: randomString(),
+        street2: randomString(),
+      }
+    : {};
+  const studentPhoneNumber = getRandomUserPhoneNumber();
+
+  const phoneNumber = hasNumberPhone
+    ? {
+        student_phone_number: studentPhoneNumber,
+        home_phone_number: getRandomUserPhoneNumber(studentPhoneNumber),
+        contact_preference: 1,
+      }
+    : {};
 
   const date = new Date();
   date.setFullYear(date.getFullYear() - randomNumber(1, 60));
   date.setMonth(date.getMonth() - randomNumber(1, 12));
   date.setDate(date.getDate() - randomNumber(1, 28));
 
-  let phoneNumber = hasNumberPhone ? await getRandomPhoneNumber() : "";
-
-  if (hasNumberPhone) {
-    let isValidPhone = checkValidNumberPhone(phoneNumber, "JP");
-    while (!isValidPhone) {
-      phoneNumber = await getRandomPhoneNumber();
-      isValidPhone = checkValidNumberPhone(phoneNumber, "JP");
-    }
-  }
-
-  const _student = hasPhoneticName ? {
-    last_name: lastName,
-    first_name: firstName,
-    last_name_phonetic: lastNamePhonetic,
-    first_name_phonetic: firstNamePhonetic,
-  }: {
-    name,
-  };
+  const _student = hasPhoneticName
+    ? {
+        last_name: lastName,
+        first_name: firstName,
+        last_name_phonetic: lastNamePhonetic,
+        first_name_phonetic: firstNamePhonetic,
+      }
+    : {
+        name,
+      };
 
   const student: StudentCSVProps = {
     ..._student,
     email,
     enrollment_status: randomNumber(1, 5),
     grade: randomNumber(0, 16),
-    phone_number: phoneNumber,
     birthday: hasBirthday ? moment(date).format("YYYY/MM/DD") : "",
     gender: hasGender ? randomNumber(1, 2) : "",
     location: hasLocations ? location : "",
+    tag: hasTags ? tag : "",
+    ...homeAddress,
+    ...phoneNumber,
   };
 
   return student;
