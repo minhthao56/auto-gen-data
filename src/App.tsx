@@ -47,6 +47,15 @@ function App() {
           <Table.Column align="center">BIRTHDAY</Table.Column>
           <Table.Column align="center">GENDER</Table.Column>
           <Table.Column align="center">LOCATION</Table.Column>
+          <Table.Column align="center">TAG</Table.Column>
+          <Table.Column align="center">STUDENT PHONE NUMBER</Table.Column>
+          <Table.Column align="center">HOME PHONE NUMBER</Table.Column>
+          <Table.Column align="center">CONTACT PREFERENCE</Table.Column>
+          <Table.Column align="center">POSTAL CODE</Table.Column>
+          <Table.Column align="center">PREFECTURE</Table.Column>
+          <Table.Column align="center">CITY</Table.Column>
+          <Table.Column align="center">STREET 1</Table.Column>
+          <Table.Column align="center">STREET 2</Table.Column>
         </Table.Header>
         <Table.Body>
           {dataStudents.map((student, i) => {
@@ -87,6 +96,33 @@ function App() {
                 </Table.Cell>
                 <Table.Cell css={{ textAlign: "center" }}>
                   {student.location}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.tag}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.student_phone_number}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.home_phone_number}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.contact_preference}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.postal_code}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.prefecture}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.city}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.street1}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.street2}
                 </Table.Cell>
               </Table.Row>
             );
