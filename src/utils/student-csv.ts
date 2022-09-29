@@ -80,6 +80,10 @@ export const generationStudent = async ({
   location,
   tag,
   prefecture,
+  hasEndDateStartDate,
+  hasSchoolHistory,
+  school,
+  schoolCourse,
 }: Omit<FormConfigGenerationFormProps, "numberRows">) => {
   const ulid = monotonicFactory();
 
@@ -110,6 +114,19 @@ export const generationStudent = async ({
       }
     : {};
 
+  const schoolHistory = hasSchoolHistory
+    ? {
+        school: school,
+        school_course: schoolCourse,
+        start_date: hasEndDateStartDate
+          ? moment(new Date()).format("YYYY/MM/DD")
+          : "",
+        end_date: hasEndDateStartDate
+          ? moment(new Date()).format("YYYY/MM/DD")
+          : "",
+      }
+    : {};
+
   const date = new Date();
   date.setFullYear(date.getFullYear() - randomNumber(1, 60));
   date.setMonth(date.getMonth() - randomNumber(1, 12));
@@ -137,6 +154,7 @@ export const generationStudent = async ({
     tag: hasTags ? tag : "",
     ...homeAddress,
     ...phoneNumber,
+    ...schoolHistory,
   };
 
   return student;

@@ -9,6 +9,7 @@ import {
   Card,
 } from "@nextui-org/react";
 import { useForm, Controller } from "react-hook-form";
+import SchoolHistoryForm from "./SchoolHistoryForm";
 
 export interface FormConfigGenerationFormProps {
   numberRows: string;
@@ -22,6 +23,10 @@ export interface FormConfigGenerationFormProps {
   tag: string;
   prefecture: string;
   hasGender: boolean;
+  hasSchoolHistory: boolean;
+  school: string;
+  schoolCourse: string;
+  hasEndDateStartDate: string;
 }
 
 export interface FormConfigGenerationProps {
@@ -50,20 +55,17 @@ export default function FormConfigGeneration({
             control={control}
             name="numberRows"
             rules={{
-              required: { value: true, message: "Add number row zo fen" },
+              required: { value: true, message: "Please add number rows" },
             }}
             render={({ field: { onChange }, fieldState: { error } }) => {
-              const isError = Boolean(error?.message);
               return (
                 <Input
                   placeholder="Number rows data"
                   css={{
                     marginBottom: 18,
-                    borderStyle: isError ? "solid" : "none",
-                    borderColor: isError ? "Red" : "",
                   }}
                   onChange={onChange}
-                  helperColor={isError ? "error" : "default"}
+                  helperColor={error?.message ? "error" : "default"}
                   helperText={error?.message}
                   type="number"
                 />
@@ -74,7 +76,7 @@ export default function FormConfigGeneration({
           <Controller
             control={control}
             name="hasPhoneticName"
-            render={({ field: { onChange } }) => {
+            render={({ field: { onChange, value } }) => {
               return (
                 <Checkbox onChange={onChange} css={{ marginBottom: 8 }}>
                   <Text>
@@ -205,8 +207,10 @@ export default function FormConfigGeneration({
               />
             </Col>
           </Row>
-
-          <Button type="submit">Create & Download CSV</Button>
+          <SchoolHistoryForm control={control} />
+          <Button type="submit" css={{ mt: 24 }}>
+            Create & Download CSV
+          </Button>
         </Container>
       </Card>
     </form>

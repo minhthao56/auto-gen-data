@@ -56,6 +56,10 @@ function App() {
           <Table.Column align="center">CITY</Table.Column>
           <Table.Column align="center">STREET 1</Table.Column>
           <Table.Column align="center">STREET 2</Table.Column>
+          <Table.Column align="center">SCHOOL</Table.Column>
+          <Table.Column align="center">SCHOOL COURSE</Table.Column>
+          <Table.Column align="center">START DATE</Table.Column>
+          <Table.Column align="center">END DATE</Table.Column>
         </Table.Header>
         <Table.Body>
           {dataStudents.map((student, i) => {
@@ -123,6 +127,18 @@ function App() {
                 </Table.Cell>
                 <Table.Cell css={{ textAlign: "center" }}>
                   {student.street2}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.school}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.school_course}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.start_date}
+                </Table.Cell>
+                <Table.Cell css={{ textAlign: "center" }}>
+                  {student.end_date}
                 </Table.Cell>
               </Table.Row>
             );

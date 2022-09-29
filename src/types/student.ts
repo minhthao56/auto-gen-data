@@ -20,4 +20,8 @@ export interface StudentCSVProps {
   city?: string;
   street1?: string;
   street2?: string;
+  school?: string;
+  school_course?: string;
+  start_date?: string;
+  end_date?: string;
 }
